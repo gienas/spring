@@ -18,6 +18,12 @@ public class CustomerServiceImpl implements CustomerService {
 	@Override
 	public Boolean payBill(String customerId, String paymentId) {
 		invoiceService.getInvoice(customerId, paymentId);
+		try {
+			Thread.sleep(123);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return null;
 	}
 	

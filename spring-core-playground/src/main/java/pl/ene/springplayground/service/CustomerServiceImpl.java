@@ -1,11 +1,15 @@
 package pl.ene.springplayground.service;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class CustomerServiceImpl implements CustomerService {
 
 	InvoiceService invoiceService;
+	
+	@Value("${app.name}")
+	private String appName;
 	
 	public CustomerServiceImpl(InvoiceService invoiceService) {
 		super();
@@ -14,6 +18,7 @@ public class CustomerServiceImpl implements CustomerService {
 
 	public Boolean payBill(String customerId, String paymentId) {
 		invoiceService.getInvoice(customerId, paymentId);
+		System.out.println("App name = " + appName);
 		return null;
 	}
 	

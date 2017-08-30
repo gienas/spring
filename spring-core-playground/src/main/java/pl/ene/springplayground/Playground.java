@@ -17,6 +17,7 @@ public class Playground
         CustomerService bean = (CustomerService) context.getBean(CustomerService.class);
         if ( bean != null ) {
         	System.out.println("SUCCESS");
+        	bean.payBill("123", "123");
         }
         else {
         	System.out.println("BEAN IS NULL");
