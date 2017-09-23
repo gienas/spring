@@ -1,7 +1,6 @@
 package pl.ene.springplayground;
 
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
@@ -9,8 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SpringPlaygroundApplication {
 	
 	public static void main(String[] args) {
-		SpringApplication.run(SpringPlaygroundApplication.class, args);
-		
+		SpringApplication.run(SpringPlaygroundApplication.class, args);	
 	}
 	
 	

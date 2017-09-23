@@ -15,15 +15,17 @@ public class CustomerServiceExecutionTimer {
 	}
 	
 	@Around(value="measurePayBill()")
-	private void measure( ProceedingJoinPoint jp) {
+	private Object measure( ProceedingJoinPoint jp) {
 		String methodName = jp.getSignature().getName();
 		long beforeTime = System.currentTimeMillis();
+		Object ret = null;
 		try {
-			jp.proceed();
+			ret = jp.proceed();
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
 		long afterTime = System.currentTimeMillis();
 		System.out.println( "Execution of " + methodName + " took " + (afterTime - beforeTime) + " miliseconds");
+		return ret;
 	}
 }
