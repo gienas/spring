@@ -13,6 +13,7 @@ import pl.ene.springbootrestjpa.domain.Customer;
  */
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
-	List<Customer> findByNameStartingWith( String name);
+	List<Customer> findByNameStartingWithIgnoreCase( String name);
+
 	
 }

@@ -41,12 +41,12 @@ public class UserController {
 	@GetMapping("/find")
 	public List<Customer> find( @RequestParam String name) {
 		List<Customer> result = new ArrayList<>();
-		customerRepository.findByNameStartingWith(name).forEach(result::add);
+		customerRepository.findByNameStartingWithIgnoreCase(name).forEach(result::add);
 		return result;
 	}
 
 	@GetMapping("/findByName")
-	public List<Customer> findByNAme( @RequestParam String name) {
+	public List<Customer> findByName( @RequestParam String name) {
 		List<Customer> result = new ArrayList<>();
 		customerManualRespository.getByName(name).forEach(result::add);
 		return result;

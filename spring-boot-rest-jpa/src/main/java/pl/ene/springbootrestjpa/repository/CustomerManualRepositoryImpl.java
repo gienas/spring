@@ -26,7 +26,7 @@ public class CustomerManualRepositoryImpl implements CustomerManualRespository {
 		CriteriaBuilder builder = em.getCriteriaBuilder();
 		CriteriaQuery<Customer> query = builder.createQuery(Customer.class);
 		Root<Customer> root = query.from(Customer.class);
-		Predicate condition = builder.like(root.get(Customer_.name), name+"%");
+		Predicate condition = builder.like( builder.lower(root.get(Customer_.name)),  name.toLowerCase() +"%");
 		query.where(condition);
 		TypedQuery<Customer> q = em.createQuery(query);
 		return q.getResultList();

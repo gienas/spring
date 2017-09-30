@@ -33,7 +33,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
-		
+
 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
@@ -63,6 +63,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
+
 		<!-- tag::verifier_test_dependencies[] -->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
@@ -71,7 +76,7 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- end::verifier_test_dependencies[] -->
-		
+
 	</dependencies>
 
 	<build>

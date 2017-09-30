@@ -1,11 +1,8 @@
 package pl.ene.springbootrestjpa;
 
-import java.sql.Connection;
-import java.sql.Driver;
-import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.util.Enumeration;
 
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Import;
@@ -19,21 +16,21 @@ public class SpringBootRestJpaApplication {
 
 	public static void main(String[] args) throws SQLException {
 				
-		//SpringApplication.run(SpringBootRestJpaApplication.class);
-	    //DriverManager dm = DriverManager.getDrivers();
-	    Enumeration<Driver> d  = DriverManager.getDrivers();
-	    while ( d.hasMoreElements()) {
-	       Driver dr =  d.nextElement();
-	       System.out.println(dr);
-	    }		
-	   
-	   Driver driver =  DriverManager.getDriver("jdbc:postgresql:/");
-	   Connection conn = DriverManager.getConnection("");
-	   
-	   
-	   //for (driver.getprop)
-	   
-	   
+		SpringApplication.run(SpringBootRestJpaApplication.class);
+//	    //DriverManager dm = DriverManager.getDrivers();
+//	    Enumeration<Driver> d  = DriverManager.getDrivers();
+//	    while ( d.hasMoreElements()) {
+//	       Driver dr =  d.nextElement();
+//	       System.out.println(dr);
+//	    }		
+//	   
+//	   Driver driver =  DriverManager.getDriver("jdbc:postgresql:/");
+//	   Connection conn = DriverManager.getConnection("");
+//	   
+//	   
+//	   //for (driver.getprop)
+//	   
+//	   
 	}
 	//mc3
 	
