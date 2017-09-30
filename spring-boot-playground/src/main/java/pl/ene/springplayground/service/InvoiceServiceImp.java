@@ -10,6 +10,7 @@ public class InvoiceServiceImp implements InvoiceService  {
 	 */
 	@Override
 	public String getInvoice( String customerID, String paymantId) {
+		System.out.println("getInvoice call");
 		return "";
 	}
 	

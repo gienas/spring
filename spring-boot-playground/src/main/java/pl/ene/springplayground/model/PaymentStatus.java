@@ -1,26 +1,18 @@
 package pl.ene.springplayground.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class PaymentStatus {
 
-	private String status;
-	
-	public PaymentStatus() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	public PaymentStatus(String status) {
-		this.status = status;
-	}
-	
 	public PaymentStatus(Boolean status) {
 		this.status = Boolean.toString(status);
 	}
 	
-	public String getStatus() {
-		return status;
-	}
+	private String status;
 	
-	public void setStatus(String status) {
-		this.status = status;
-	}
 }

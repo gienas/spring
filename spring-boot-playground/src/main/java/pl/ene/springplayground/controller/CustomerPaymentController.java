@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pl.ene.springplayground.model.PaymentStatus;
 import pl.ene.springplayground.service.CustomerService;
 
+
 @Controller
 public class CustomerPaymentController {
 
