@@ -3,6 +3,8 @@ package pl.ene.springbootrestjpa.controllers;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,10 +27,24 @@ public class UserController {
 		this.customerManualRespository = customerManualRespository;
 	}
 	
+	/**
+	 * Get user by name
+	 * @param name full name 
+	 * @return //TODO
+	 */
 	@GetMapping("/user/{name}")
-	Customer getUser(@PathVariable(name = "name") String name) {
-		//TODO implementation
-		return null;
+	ResponseEntity<Customer> getUser(@PathVariable(name = "name") String name) {
+		List<Customer> result  = customerRepository.findByName(name);
+		if (result.size() > 1) {
+			return  ResponseEntity
+		            .status(HttpStatus.PAYLOAD_TOO_LARGE)                 
+		            .body(null);
+		} else if ( result.size()==0) {
+			return  ResponseEntity
+		            .status(HttpStatus.NOT_FOUND)                 
+		            .body(null);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(result.get(0));
 	}
 
 	@GetMapping("/users")
@@ -52,4 +68,6 @@ public class UserController {
 		return result;
 	}
 
+	
+	
 }

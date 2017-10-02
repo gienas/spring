@@ -14,6 +14,6 @@ import pl.ene.springbootrestjpa.domain.Customer;
 public interface CustomerRepository extends CrudRepository<Customer, Long> {
 
 	List<Customer> findByNameStartingWithIgnoreCase( String name);
-
+	List<Customer> findByName(String name);
 	
 }

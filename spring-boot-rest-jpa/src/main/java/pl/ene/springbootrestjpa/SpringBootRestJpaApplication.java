@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Import;
 
 import pl.ene.springbootrestjpa.config.PersistenceConfig;
 
-@EnableAutoConfiguration
+//@EnableAutoConfiguration
 @SpringBootApplication
 @Import(PersistenceConfig.class)
 public class SpringBootRestJpaApplication {
