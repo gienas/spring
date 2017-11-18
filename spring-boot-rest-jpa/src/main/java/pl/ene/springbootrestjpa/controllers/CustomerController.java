@@ -2,7 +2,6 @@ package pl.ene.springbootrestjpa.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,18 +15,20 @@ import org.springframework.web.bind.annotation.RestController;
 import pl.ene.springbootrestjpa.domain.Customer;
 import pl.ene.springbootrestjpa.repository.CustomerManualRespository;
 import pl.ene.springbootrestjpa.repository.CustomerRepository;
+import pl.ene.springbootrestjpa.services.CustomerService;
 
 @RestController
-public class UserController {
+public class CustomerController {
 
 	private CustomerRepository customerRepository;
 	private CustomerManualRespository customerManualRespository;
+	private CustomerService service;
 	
-	
-	public UserController(CustomerRepository userRepository, CustomerManualRespository customerManualRespository) {
+	public CustomerController(CustomerRepository userRepository, CustomerManualRespository customerManualRespository, CustomerService service) {
 		// TODO Auto-generated constructor stub
 		this.customerRepository = userRepository;
 		this.customerManualRespository = customerManualRespository;
+		this.service = service;
 	}
 	
 	/**
@@ -50,10 +51,11 @@ public class UserController {
 		return ResponseEntity.status(HttpStatus.OK).body(result.get(0));
 	}
 
-	@GetMapping("/users")
+	@GetMapping(value={"/","/users"})
 	public List<Customer> users() {
 		List<Customer> result = new ArrayList<>();
 		customerRepository.findAll().forEach(result::add);
+		if (result.size() > 0 )  System.out.println("result greater than 0");
 		return result;
 	}
 
@@ -72,20 +74,18 @@ public class UserController {
 	}
 
 	
-	@PostMapping("/add")
-	public  ResponseEntity<?> addCustomer(@RequestBody Customer c) {
+	@PostMapping({"/add", "/update"})
+	public  ResponseEntity<?> addOrUpdateCustomer(@RequestBody Customer c) {
 		if ( c == null ) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); 
-		
-		//Fixme to sequence
-		Random rn = new Random();
-		int range = Integer.MAX_VALUE;
-		Integer randomNum =  rn.nextInt(range);
-		System.out.println(randomNum);
-		c.setId(new Long(randomNum.toString()));
-		
-		customerRepository.save(c);
-		
+		try {
+		service.addOrUpdateCustomer(c);
+		} catch ( Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+		}
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 	}
+	
+	
 	
 }

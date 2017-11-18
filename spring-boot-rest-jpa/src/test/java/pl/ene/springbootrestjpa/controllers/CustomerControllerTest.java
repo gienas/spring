@@ -26,14 +26,14 @@ import pl.ene.springbootrestjpa.repository.CustomerRepository;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserControllerTest {
+public class CustomerControllerTest {
 
 	@MockBean
 	private CustomerRepository customerRepository;
 
 	@InjectMocks
 	@Autowired
-	private UserController controller;
+	private CustomerController controller;
 
 	@Test
 	public void getUser_shouldReturnPayloadToLarge() throws Exception {

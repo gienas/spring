@@ -15,22 +15,8 @@ import pl.ene.springbootrestjpa.config.PersistenceConfig;
 public class SpringBootRestJpaApplication {
 
 	public static void main(String[] args) throws SQLException {
-				
 		SpringApplication.run(SpringBootRestJpaApplication.class);
-//	    //DriverManager dm = DriverManager.getDrivers();
-//	    Enumeration<Driver> d  = DriverManager.getDrivers();
-//	    while ( d.hasMoreElements()) {
-//	       Driver dr =  d.nextElement();
-//	       System.out.println(dr);
-//	    }		
-//	   
-//	   Driver driver =  DriverManager.getDriver("jdbc:postgresql:/");
-//	   Connection conn = DriverManager.getConnection("");
-//	   
-//	   
-//	   //for (driver.getprop)
-//	   
-//	   
+		System.out.println();
 	}
 	//mc3
 	

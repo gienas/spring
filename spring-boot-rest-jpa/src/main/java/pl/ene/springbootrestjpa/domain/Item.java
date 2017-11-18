@@ -3,9 +3,11 @@ package pl.ene.springbootrestjpa.domain;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -20,7 +22,6 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @Builder
-@ToString
 @Entity
 @Table(name="item")
 public class Item {
@@ -30,6 +31,8 @@ public class Item {
 	}
 
 	@Id
+	@GeneratedValue(generator="item_seq")
+	@SequenceGenerator(name="item_seq",sequenceName="item_seq", allocationSize=1)
 	@Column(name = "id")
 	private Long id;
 

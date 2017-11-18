@@ -7,5 +7,5 @@ import pl.ene.springbootrestjpa.domain.Customer;
 public interface  CustomerManualRespository {
 
 	List<Customer> getByName(String name);
-	
+
 }
