@@ -41,7 +41,8 @@ public class CustomerService {
 	private Customer checkIfCustomerAlreadyExists(Customer customer) {
 		Customer c = null;
 		if (customer.getId() != null) {
-			c = customerRepository.findOne(customer.getId());
+			//c = customerRepository.findOne(customer.getId());
+			c = customerRepository.findById(customer.getId()).get();
 		} else if (customer.getName() != null) {
 			c = customerRepository.findByName(customer.getName()).stream().findFirst().orElse(null);
 		}

@@ -12,22 +12,25 @@ import com.jayway.jsonpath.JsonPath;
 
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import io.restassured.response.ResponseOptions;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 import pl.ene.springbootrestjpa.controllers.GreetingsController;
 
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
+@RunWith(SpringRunner.class)
+@SpringBootTest
 public class SpringBootRestJpaApplicationTests {
 
 	@Before
 	public void setup() {
 		RestAssuredMockMvc.standaloneSetup(new GreetingsController());
 	}
-	
+
 	@Test
 	public void greetingTest_shouldReturnHello() {
 		//when
 		ResponseOptions<?> response = given().get("/test");
-		
+
 		// then:
 		assertThat(response.statusCode()).isEqualTo(200);
 		//and
@@ -36,10 +39,10 @@ public class SpringBootRestJpaApplicationTests {
 		assertThatJson(parsedJson).field("['id']").isEqualTo("1");
 		//assertThatRejectionReasonIsNull(parsedJson.read("$.['rejection.reason']"));
 	}
-	
+
 	@Test
 	public void contextLoads() {
-		
+
 	}
 
 }

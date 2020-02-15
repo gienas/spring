@@ -21,13 +21,13 @@ import pl.ene.springbootrestjpa.services.CustomerService;
 public class CustomerController {
 
     private CustomerRepository customerRepository;
-    private CustomerManualRespository customerManualRespository;
+    //private CustomerManualRespository customerManualRespository;
     private CustomerService service;
 
-    public CustomerController(CustomerRepository userRepository, CustomerManualRespository customerManualRespository, CustomerService service) {
+    public CustomerController(CustomerRepository userRepository, CustomerService service) {
         // TODO Auto-generated constructor stub
         this.customerRepository = userRepository;
-        this.customerManualRespository = customerManualRespository;
+        //this.customerManualRespository = customerManualRespository;
         this.service = service;
     }
 
@@ -70,7 +70,7 @@ public class CustomerController {
     @GetMapping("/findByName")
     public List<Customer> findByName(@RequestParam String name) {
         List<Customer> result = new ArrayList<>();
-        customerManualRespository.getByName(name).forEach(result::add);
+        customerRepository.findByName(name).forEach(result::add);
         return result;
     }
 
