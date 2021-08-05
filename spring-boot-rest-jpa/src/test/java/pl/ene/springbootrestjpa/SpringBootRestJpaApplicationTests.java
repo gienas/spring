@@ -4,25 +4,22 @@ import static com.toomuchcoding.jsonassert.JsonAssertion.assertThatJson;
 import static io.restassured.module.mockmvc.RestAssuredMockMvc.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.Before;
-import org.junit.Test;
 
 import com.jayway.jsonpath.DocumentContext;
 import com.jayway.jsonpath.JsonPath;
 
 import io.restassured.module.mockmvc.RestAssuredMockMvc;
 import io.restassured.response.ResponseOptions;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 import pl.ene.springbootrestjpa.controllers.GreetingsController;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class SpringBootRestJpaApplicationTests {
 
-	@Before
-	public void setup() {
+	@BeforeAll
+	public static void setup() {
 		RestAssuredMockMvc.standaloneSetup(new GreetingsController());
 	}
 

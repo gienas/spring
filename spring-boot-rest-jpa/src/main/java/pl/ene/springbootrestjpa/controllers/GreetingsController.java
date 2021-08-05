@@ -13,8 +13,8 @@ public class GreetingsController {
 	@RequestMapping("/greeting")
 	public Greeting greeting( @RequestParam(defaultValue="world") String name) {
 	 	return new Greeting(1L, "Hello " + name);
-	}	
-	
+	}
+
 	@RequestMapping("/test")
 	public Greeting test( @RequestParam(defaultValue="test") String name, Person person ) {
 	 	return new Greeting(1L, "Hello");

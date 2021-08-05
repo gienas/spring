@@ -10,9 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.assertj.core.util.Lists;
-import org.junit.Test;
-import org.junit.experimental.results.ResultMatchers;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,7 +22,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import pl.ene.springbootrestjpa.domain.Customer;
 import pl.ene.springbootrestjpa.repository.CustomerRepository;
 
-@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
+//@RunWith(SpringRunner.class)
 @SpringBootTest
 public class CustomerControllerTest {
 
