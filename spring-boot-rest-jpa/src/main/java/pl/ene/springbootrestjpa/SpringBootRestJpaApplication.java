@@ -19,7 +19,6 @@ public class SpringBootRestJpaApplication {
 
 	public static void main(String[] args) throws SQLException {
 		SpringApplication.run(SpringBootRestJpaApplication.class);
-		System.out.println();
 	}
 	//mc3
 	

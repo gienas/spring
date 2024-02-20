@@ -2,20 +2,19 @@ package pl.ene.springbootrestjpa.controllers;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import pl.ene.springbootrestjpa.domain.Customer;
+import pl.ene.springbootrestjpa.domain.ErrorBody;
 import pl.ene.springbootrestjpa.repository.CustomerManualRespository;
 import pl.ene.springbootrestjpa.repository.CustomerRepository;
 import pl.ene.springbootrestjpa.services.CustomerService;
+
+import javax.persistence.EntityExistsException;
 
 @RestController
 public class CustomerController {
@@ -75,16 +74,39 @@ public class CustomerController {
     }
 
 
-    @PostMapping({"/add", "/update"})
-    public ResponseEntity<?> addOrUpdateCustomer(@RequestBody Customer c) {
+    @PostMapping({"/add"})
+    public ResponseEntity<?> addCustomer(@RequestBody Customer c) {
+        Customer added = null;
         if (c == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         try {
-            service.addOrUpdateCustomer(c);
-        } catch (Exception e) {
+            added = service.addCustomer(c);
+        }
+        catch (EntityExistsException e) {
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(new ErrorBody("Object already exists", "Consider to use PUT method if you need to update"));
+        }
+        catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
         }
-        return ResponseEntity.status(HttpStatus.OK).body(null);
+        return ResponseEntity.status(HttpStatus.CREATED).body(added);
+    }
+
+
+    @PutMapping({"/update"})
+    public ResponseEntity<?> updateCustomer(@RequestBody Customer c) {
+        Customer updated = null;
+        if (c.getId() == null) return ResponseEntity.status(HttpStatus.BAD_REQUEST).body( new ErrorBody("Id required", ""));
+        try {
+            updated = service.updateCustomer(c);
+        }
+        catch (NoSuchElementException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ErrorBody("Didn't find object to be updated Id " + c.getId(), "Consider to use POST method for adding a new object") );
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.PRECONDITION_FAILED).body(null);
+        }
+        return ResponseEntity.status(HttpStatus.OK).body(updated);
     }
 
 
