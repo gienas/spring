@@ -15,7 +15,7 @@ import pl.ene.springbootrestjpa.domain.ReturnBody;
 import pl.ene.springbootrestjpa.repository.CustomerRepository;
 import pl.ene.springbootrestjpa.services.CustomerService;
 
-import javax.persistence.EntityExistsException;
+import jakarta.persistence.EntityExistsException;
 
 @RestController
 @RequestMapping("customers")

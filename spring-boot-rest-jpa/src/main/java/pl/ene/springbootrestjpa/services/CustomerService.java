@@ -5,9 +5,10 @@ import pl.ene.springbootrestjpa.domain.Customer;
 import pl.ene.springbootrestjpa.domain.Item;
 import pl.ene.springbootrestjpa.repository.CustomerRepository;
 
-import javax.persistence.EntityExistsException;
-import javax.persistence.EntityNotFoundException;
+import jakarta.persistence.EntityExistsException;
+import jakarta.persistence.EntityNotFoundException;
 import java.util.NoSuchElementException;
+
 
 @Service
 public class CustomerService {
