@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import pl.ene.springbootrestjpa.domain.Customer;
 import pl.ene.springbootrestjpa.domain.ReturnBody;
+import pl.ene.springbootrestjpa.metrics.CustomMetricListAllCustomers;
 import pl.ene.springbootrestjpa.repository.CustomerRepository;
 import pl.ene.springbootrestjpa.services.CustomerService;
 
@@ -25,11 +26,14 @@ public class CustomerController {
     //private CustomerManualRespository customerManualRespository;
     private CustomerService service;
 
-    public CustomerController(CustomerRepository userRepository, CustomerService service) {
+    private CustomMetricListAllCustomers customMetricListAllCustomers;
+
+    public CustomerController(CustomerRepository userRepository, CustomerService service, CustomMetricListAllCustomers customMetricListAllCustomers) {
         // TODO Auto-generated constructor stub
         this.customerRepository = userRepository;
         //this.customerManualRespository = customerManualRespository;
         this.service = service;
+        this.customMetricListAllCustomers = customMetricListAllCustomers;
     }
 
     /**
@@ -60,6 +64,7 @@ public class CustomerController {
         List<Customer> result = new ArrayList<>();
         customerRepository.findAll().forEach(result::add);
         if (result.size() > 0) System.out.println("result greater than 0");
+        customMetricListAllCustomers.incrementCustomMetric();
         return result;
     }
     @Operation(summary = "Find customer by name / ignore case")
