@@ -23,6 +23,7 @@
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<java.version>17</java.version>
 		<spring-cloud.version>2023.0.0</spring-cloud.version>
+		<spring-cloud-contract.version>4.1.4</spring-cloud-contract.version>
 	</properties>
 
 	<dependencies>
@@ -95,6 +96,12 @@
 			<artifactId>micrometer-registry-prometheus</artifactId>
 		</dependency>
 
+		<!-- For pet store gen-->
+		<!-- OpenAPI dependencies (Gson and other tools for client generation) -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -113,6 +120,25 @@
 	<build>
 		<plugins>
 			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>build-helper-maven-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>add-source</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>add-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>${project.build.directory}/generated-sources/openapi/src/java/</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
@@ -124,7 +150,44 @@
 					</excludes>
 				</configuration>
 			</plugin>
+			<!-- Generate sources for consumed API -->
+			<plugin>
+				<groupId>org.openapitools</groupId>
+				<artifactId>openapi-generator-maven-plugin</artifactId>
+				<version>7.9.0</version>
+				<executions>
+					<execution>
+						<id>order-capture-api-v4</id>
+						<goals>
+							<goal>generate</goal>
+						</goals>
+						<configuration>
+							<inputSpec>src/main/resources/openapi-pet-store.json</inputSpec>
+							<generatorName>java</generatorName>
+							<configOptions>
+								<library>resttemplate</library>
+								<dateLibrary>java8</dateLibrary>
+								<useBeanValidation>true</useBeanValidation>
+								<openApiNullablee>false</openApiNullablee>
+								<useSpringBoot>true</useSpringBoot>
+								<useJakartaEe>true</useJakartaEe>
+								<openApiNullable>false</openApiNullable>
+							</configOptions>
+							<skipValidateSpec>true</skipValidateSpec>
+							<generateApis>true</generateApis>
+							<generateApiTests>false</generateApiTests>
+							<generateModelTests>false</generateModelTests>
+							<generateModelDocumentation>false</generateModelDocumentation>
+							<generateSupportingFiles>true</generateSupportingFiles>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+
 		</plugins>
+
+
 	</build>
 
 
