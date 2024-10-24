@@ -1,6 +1,7 @@
 package pl.ene.springbootrestjpa.config;
 
 import org.openapitools.client.ApiClient;
+import org.openapitools.client.api.EvenOddControllerApi;
 import org.openapitools.client.api.PetsApi;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +26,15 @@ public class RestClientsConfig {
         //This value should be read from a config component
         api.setBasePath("http://localhost:8080/v1");
         return new PetsApi(api);
+    }
+
+    @Bean
+    EvenOddControllerApi simpleProducerApiClient(RestTemplateBuilder restTemplateBuilder) {
+        RestTemplate restTemplate =  restTemplateBuilder.build();
+        ApiClient api = new ApiClient(restTemplate);
+        //This value should be read from a config component
+        api.setBasePath("http://localhost:8080");
+        return new EvenOddControllerApi(api);
     }
 
 }

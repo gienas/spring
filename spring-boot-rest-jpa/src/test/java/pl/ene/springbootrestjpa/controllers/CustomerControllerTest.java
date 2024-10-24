@@ -13,6 +13,7 @@ import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -24,6 +25,7 @@ import pl.ene.springbootrestjpa.repository.CustomerRepository;
 
 //@RunWith(SpringRunner.class)
 //@RunWith(SpringRunner.class)
+//@AutoConfigureMockMvc
 @SpringBootTest
 public class CustomerControllerTest {
 
@@ -34,13 +36,8 @@ public class CustomerControllerTest {
     @Autowired
     private CustomerController controller;
 
-//	@Test
-//	public void getUser_shouldReturnPayloadToLarge() throws Exception {
-//		List<Customer> list = Stream.of(new Customer(), new Customer()).collect(Collectors.toList());
-//		when(customerRepository.findByName(anyString())).thenReturn(list);
-//		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-//		mockMvc.perform(get("/user/Abc")).andExpect(status().isPayloadTooLarge());
-//	}
+//    @Autowired
+//    MockMvc mockMvc;
 
     @Test
     public void getUser_shouldReturnNotFound() throws Exception {
@@ -50,4 +47,5 @@ public class CustomerControllerTest {
         mockMvc.perform(get("/user/Abc")).andExpect(status().isNotFound());
     }
 
+//   p
 }
