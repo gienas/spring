@@ -27,12 +27,12 @@ import pl.ene.springbootrestjpa.repository.CustomerRepository;
 @SpringBootTest
 public class CustomerControllerTest {
 
-	@MockBean
-	private CustomerRepository customerRepository;
+    @MockBean
+    private CustomerRepository customerRepository;
 
-	@InjectMocks
-	@Autowired
-	private CustomerController controller;
+    @InjectMocks
+    @Autowired
+    private CustomerController controller;
 
 //	@Test
 //	public void getUser_shouldReturnPayloadToLarge() throws Exception {
@@ -42,12 +42,12 @@ public class CustomerControllerTest {
 //		mockMvc.perform(get("/user/Abc")).andExpect(status().isPayloadTooLarge());
 //	}
 
-	@Test
-	public void getUser_shouldReturnNotFound() throws Exception {
-		List<Customer> list = Lists.emptyList();
-		when(customerRepository.findByName(anyString())).thenReturn(list);
-		MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
-		mockMvc.perform(get("/user/Abc")).andExpect(status().isNotFound());
-	}
+    @Test
+    public void getUser_shouldReturnNotFound() throws Exception {
+        List<Customer> list = Lists.emptyList();
+        when(customerRepository.findByName(anyString())).thenReturn(list);
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc.perform(get("/user/Abc")).andExpect(status().isNotFound());
+    }
 
 }
