@@ -240,7 +240,7 @@
 				</executions>
 			</plugin>
 
-
+<!-- 	TBD once we will have to expose our stub for others -->
 <!--			<plugin>-->
 <!--				<groupId>org.springframework.cloud</groupId>-->
 <!--				<artifactId>spring-cloud-contract-maven-plugin</artifactId>-->
