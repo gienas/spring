@@ -27,8 +27,12 @@
 		<url/>
 	</scm>
 	<properties>
+		<!-- Bytecode target. NOTE: the build itself requires a JDK >= 22 (see
+		     spring-cloud-contract-maven-plugin below), even though classes are
+		     compiled for Java 17 compatibility. The enforcer plugin guards this. -->
 		<java.version>17</java.version>
 		<spring-cloud.version>2023.0.3</spring-cloud.version>
+		<maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -83,6 +87,37 @@
 
 	<build>
 		<plugins>
+			<!-- Fail fast with a clear message if the toolchain is too old.
+			     spring-cloud-contract-maven-plugin 4.1.4 requires Java 22+, and
+			     build-helper/modern plugins require Maven 3.6.3+. -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>${maven-enforcer-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>enforce-build-environment</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireJavaVersion>
+									<version>[22,)</version>
+									<message>This project requires JDK 22 or newer to build, because spring-cloud-contract-maven-plugin 4.1.4 needs it. Current JDK is too old.</message>
+								</requireJavaVersion>
+								<requireMavenVersion>
+									<version>[3.6.3,)</version>
+									<message>This project requires Maven 3.6.3 or newer. The bundled wrapper may be older; use a newer Maven.</message>
+								</requireMavenVersion>
+							</rules>
+							<fail>true</fail>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<!-- Generates contract tests and the stubs JAR consumed by
+			     spring-boot-rest-jpa. REQUIRES JDK 22+ (enforced above). -->
 			<plugin>
 				<groupId>org.springframework.cloud</groupId>
 				<artifactId>spring-cloud-contract-maven-plugin</artifactId>
