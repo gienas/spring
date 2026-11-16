@@ -112,6 +112,15 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.OK).body(new ReturnBody("Deleted successfully", ""));
     }
 
+    @Operation(summary = "Delete all customers")
+    @DeleteMapping()
+    public ResponseEntity<?> deleteAllCustomers() {
+        long deleted = customerRepository.count();
+        customerRepository.deleteAll();
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(new ReturnBody("Deleted all customers successfully", "Removed " + deleted + " customer(s)"));
+    }
+
     @Operation(summary = "Delete customer by id")
     @DeleteMapping({"/byId/{id}"})
     public ResponseEntity<?> deleteCustomer(@PathVariable(name = "id") Long id) {
