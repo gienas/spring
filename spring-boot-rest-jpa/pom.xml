@@ -108,21 +108,18 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-contract-stub-runner</artifactId>
-			<version>4.0.0</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-contract-spec</artifactId>
-			<version>4.0.0</version>
 			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-contract-wiremock</artifactId>
-			<version>4.0.0</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -205,15 +202,8 @@
 							<generateSupportingFiles>true</generateSupportingFiles>
 						</configuration>
 					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.openapitools</groupId>
-				<artifactId>openapi-generator-maven-plugin</artifactId>
-				<version>7.9.0</version>
-				<executions>
-					<execution>
-						<id>spring-boot-simple-producer</id>
+						<execution>
+							<id>spring-boot-simple-producer</id>
 						<goals>
 							<goal>generate</goal>
 						</goals>

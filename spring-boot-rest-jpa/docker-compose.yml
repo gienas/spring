@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: spring-boot-rest-jpa-pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: users
+      POSTGRES_USER: ene
+      POSTGRES_PASSWORD: ene
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ene -d users"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  pgdata:
