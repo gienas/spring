@@ -1,7 +1,10 @@
 package pl.ene.springbootrestjpa.controllers;
 
 import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -45,6 +48,14 @@ public class CustomerControllerTest {
         when(customerRepository.findByName(anyString())).thenReturn(list);
         MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
         mockMvc.perform(get("/user/Abc")).andExpect(status().isNotFound());
+    }
+
+    @Test
+    public void deleteAllCustomers_shouldReturnOkAndInvokeDeleteAll() throws Exception {
+        when(customerRepository.count()).thenReturn(3L);
+        MockMvc mockMvc = MockMvcBuilders.standaloneSetup(controller).build();
+        mockMvc.perform(delete("/customers")).andExpect(status().isOk());
+        verify(customerRepository, times(1)).deleteAll();
     }
 
 //   p
